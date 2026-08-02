@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Multiply & Play!</title>
+
+   <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<style>
+   @keyframes popIn {
+      0% {
+         transform: scale(0);
+         opacity: 0;
+      }
+
+      60% {
+         transform: scale(1.2);
+      }
+
+      100% {
+         transform: scale(1);
+         opacity: 1;
+      }
+   }
+
+   .pop-in {
+      animation: popIn 300ms ease forwards;
+   }
+</style>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
+
+   <!-- Loading Modal -->
+   <div id="loadingModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+      <div class="bg-white rounded-3xl p-8 w-11/12 max-w-md shadow-xl text-center">
+
+         <div class="text-5xl mb-4 animate-pulse">
+            🎮
+         </div>
+
+         <h2 class="text-3xl font-bold text-blue-600">
+            Loading Assets...
+         </h2>
+
+         <p id="loadingStatus" class="mt-4 text-gray-600">
+
+            Preparing the game...
+
+         </p>
+
+         <!-- Loading Spinner -->
+         <div class="flex justify-center mt-8">
+
+            <div class="w-16 h-16 border-8 border-gray-200 border-t-blue-500 rounded-full animate-spin">
+            </div>
+
+         </div>
+
+      </div>
+
+   </div>
+
+   <!-- Start Modal -->
+   <div id="startModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+      <div class="bg-white rounded-3xl p-6 md:p-10 text-center max-w-md w-11/12 shadow-xl">
+
+         <h1 class="text-4xl font-bold text-blue-600">
+            🎮 Multiply & Play!
+         </h1>
+
+         <p class="mt-4 text-gray-600">
+            Answer 10 multiplication questions and earn the highest score!
+         </p>
+
+         <button id="playBtn"
+            class="mt-8 bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-4 rounded-xl transition">
+
+            ▶ Play
+
+         </button>
+
+      </div>
+
+   </div>
+
+   <div id="gameCard" class="w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-white rounded-3xl shadow-xl p-6 md:p-8 mx-4">
+
+      <!-- Header -->
+      <div class="text-center">
+
+         <h1 class="text-blue-600 text-xl font-semibold">
+            Multiply & Play! 🎮
+         </h1>
+
+         <p id="questionCounter" class="text-gray-500 mt-1">
+            Question 1 of 10
+         </p>
+
+         <p id="score" class="text-blue-700 font-bold text-lg mt-4">
+            Score: 0
+         </p>
+
+      </div>
+
+      <!-- Question -->
+      <div class="text-center mt-8">
+
+         <h2 id="question" class="font-bold text-center text-4xl md:text-5xl lg:text-6xl">
+         </h2>
+
+      </div>
+
+      <!-- Blocks -->
+      <div class="mt-8 flex justify-center">
+
+         <div class="bg-slate-100 rounded-xl p-4">
+
+            <div id="blocks" class="grid gap-2">
+            </div>
+
+         </div>
+
+      </div>
+
+      <!-- Input -->
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mt-8">
+
+         <input type="number" placeholder="Answer" id="answerInput"
+            class="w-28 text-center border-2 border-slate-300 rounded-lg py-3 text-2xl outline-none focus:border-blue-500">
+
+         <button id="submitBtn"
+            class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-3 rounded-lg transition">
+            Submit
+         </button>
+
+      </div>
+
+      <!-- Feedback -->
+      <div class="mt-8 text-center">
+
+         <p id="feedback" class="text-center mt-6 text-xl font-semibold hidden">
+         </p>
+
+      </div>
+
+      <!-- Next Question Button -->
+
+      <div class="flex justify-center mt-6">
+
+         <button id="nextBtn"
+            class="hidden bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-lg mt-4 transition">
+            Next Question →
+         </button>
+
+      </div>
+
+   </div>
+
+
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="app.js"></script>
